@@ -6,7 +6,7 @@ const strikethrough = (str) => {
   };
 
   for (let i = 0; i < str.length; i++) {
-    strikethroughStr += translate(str[i]);
+    if (str[i] !== "\u0336") strikethroughStr += translate(str[i]);
   }
 
   return strikethroughStr;

@@ -1,15 +1,45 @@
 import styled from "styled-components";
+import { useState, useEffect, useRef } from "react";
 
 const Textarea = ({ text, setText }) => {
+  const textareaRef = useRef(null);
+  const [characters, setCharacters] = useState(0);
+  const [words, setWords] = useState(0);
+  const [lines, setLines] = useState(0);
+
+  useEffect(() => {
+    let lineCount =
+      text === "" ? 0 : textareaRef.current.value.split("\n").length;
+    let wordCount = 0;
+    let spaces = 0;
+    text.split("\n").forEach((line) => {
+      line.split(" ").forEach((word) => {
+        if (word === "") {
+          spaces++;
+        }
+      });
+
+      wordCount += line.split(" ").length;
+    });
+    setCharacters(text.split("").length);
+    setWords(wordCount - spaces);
+    setLines(lineCount);
+  }, [text]);
+
   return (
     <SCTextarea>
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Type (or paste) your text here"
+        ref={textareaRef}
       >
         {text}
       </textarea>
+      <p>
+        Characters: <span>{characters}</span> | Words: <span>{words}</span> |
+        Lines: <span>{lines}</span>
+      </p>
     </SCTextarea>
   );
 };
@@ -17,6 +47,7 @@ const Textarea = ({ text, setText }) => {
 const SCTextarea = styled.div`
   width: 100vw;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
