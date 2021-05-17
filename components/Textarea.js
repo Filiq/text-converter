@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState, useEffect, useRef } from "react";
 
-const Textarea = ({ text, setText }) => {
+const Textarea = ({ text, setText, placeholder }) => {
   const textareaRef = useRef(null);
   const [characters, setCharacters] = useState(0);
   const [words, setWords] = useState(0);
@@ -31,11 +31,9 @@ const Textarea = ({ text, setText }) => {
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Type (or paste) your text here"
+        placeholder={placeholder}
         ref={textareaRef}
-      >
-        {text}
-      </textarea>
+      ></textarea>
       <div className="textInfo">
         <p>
           Characters: <span>{characters}</span> | Words: <span>{words}</span> |

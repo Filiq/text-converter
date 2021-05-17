@@ -12,8 +12,10 @@ import italic from "../functions/italic";
 import boldItalic from "../functions/boldItalic";
 import underline from "../functions/underline";
 import wide from "../functions/wide";
+import morseEncode from "../functions/morseEncode";
+import morseDecode from "../functions/morseDecode";
 
-const Buttons = ({ text, setText }) => {
+const Buttons = ({ text, setText, setPlaceholder }) => {
   const changeText = (str) => {
     if (text === "") return;
     switch (str) {
@@ -62,6 +64,12 @@ const Buttons = ({ text, setText }) => {
       case "wide":
         setText(wide(text));
         break;
+      case "morseencode":
+        setText(morseEncode(text));
+        break;
+      case "morsedecode":
+        setText(morseDecode(text));
+        break;
       case "copy":
         const textField = document.createElement("textarea");
         textField.innerText = text;
@@ -81,33 +89,119 @@ const Buttons = ({ text, setText }) => {
   return (
     <SCButtons>
       <div className="mainButtons">
-        <button onClick={() => changeText("sentence")}>Sentence case</button>
-        <button onClick={() => changeText("lower")}>lower case</button>
-        <button onClick={() => changeText("upper")}>UPPER CASE</button>
-        <button onClick={() => changeText("capitalize")}>
+        <button
+          onClick={() => changeText("sentence")}
+          onMouseEnter={() => setPlaceholder("Type (or paste) your text here.")}
+        >
+          Sentence case
+        </button>
+        <button
+          onClick={() => changeText("lower")}
+          onMouseEnter={() => setPlaceholder("type (or paste) your text here")}
+        >
+          lower case
+        </button>
+        <button
+          onClick={() => changeText("upper")}
+          onMouseEnter={() => setPlaceholder("TYPE (OR PASTE) YOUR TEXT HERE")}
+        >
+          UPPER CASE
+        </button>
+        <button
+          onClick={() => changeText("capitalize")}
+          onMouseEnter={() => setPlaceholder("Type (Or Paste) Your Text Here")}
+        >
           Capitalized Case
         </button>
-        <button onClick={() => changeText("alternate")}>
+        <button
+          onClick={() => changeText("alternate")}
+          onMouseEnter={() => setPlaceholder("tYpE (oR PaStE) yOuR TeXt hErE")}
+        >
           aLtErNaTiNg cAsE
         </button>
-        <button onClick={() => changeText("inverse")}>iNVERSE cASE</button>
+        <button
+          onClick={() => changeText("inverse")}
+          onMouseEnter={() => setPlaceholder("tYPE (OR PASTE) YOUR TEXT HERE")}
+        >
+          iNVERSE cASE
+        </button>
         <button onClick={() => changeText("spaces")}>
           Remove Extra Spaces
         </button>
-        <button onClick={() => changeText("reverse")}>Reverse Text</button>
-        <button onClick={() => changeText("bold")}>Bold Text</button>
-        <button onClick={() => changeText("italic")}>Italic Text</button>
-        <button onClick={() => changeText("bolditalic")}>
-          Bold Italic Text
+        <button
+          onClick={() => changeText("reverse")}
+          onMouseEnter={() => setPlaceholder("ereh txet ruoy )etsap ro( epyT")}
+        >
+          Reverse Text
         </button>
-        <button onClick={() => changeText("strikethrough")}>
-          Strikethrough Text
+        <button
+          onClick={() => changeText("bold")}
+          onMouseEnter={() => setPlaceholder("𝗧𝘆𝗽𝗲 (𝗼𝗿 𝗽𝗮𝘀𝘁𝗲) 𝘆𝗼𝘂𝗿 𝘁𝗲𝘅𝘁 𝗵𝗲𝗿𝗲")}
+        >
+          <b>Bold Text</b>
         </button>
-        <button onClick={() => changeText("underline")}>Underline Text</button>
-        <button onClick={() => changeText("upsidedown")}>
-          Upside Down Text
+        <button
+          onClick={() => changeText("italic")}
+          onMouseEnter={() => setPlaceholder("𝘛𝘺𝘱𝘦 (𝘰𝘳 𝘱𝘢𝘴𝘵𝘦) 𝘺𝘰𝘶𝘳 𝘵𝘦𝘹𝘵 𝘩𝘦𝘳𝘦")}
+        >
+          <i>Italic Text</i>
         </button>
-        <button onClick={() => changeText("wide")}>Wide Text</button>
+        <button
+          onClick={() => changeText("bolditalic")}
+          onMouseEnter={() => setPlaceholder("𝙏𝙮𝙥𝙚 (𝙤𝙧 𝙥𝙖𝙨𝙩𝙚) 𝙮𝙤𝙪𝙧 𝙩𝙚𝙭𝙩 𝙝𝙚𝙧𝙚")}
+        >
+          <b>
+            <i>Bold Italic Text</i>
+          </b>
+        </button>
+        <button
+          onClick={() => changeText("strikethrough")}
+          onMouseEnter={() => setPlaceholder("T̶y̶p̶e̶ ̶(̶o̶r̶ ̶p̶a̶s̶t̶e̶)̶ ̶y̶o̶u̶r̶ ̶t̶e̶x̶t̶ ̶h̶e̶r̶e̶")}
+        >
+          S̶t̶r̶i̶k̶e̶t̶h̶r̶o̶u̶g̶h̶ ̶T̶e̶x̶t̶
+        </button>
+        <button
+          onClick={() => changeText("underline")}
+          onMouseEnter={() => setPlaceholder("T̲y̲p̲e̲ ̲(̲o̲r̲ ̲p̲a̲s̲t̲e̲)̲ ̲y̲o̲u̲r̲ ̲t̲e̲x̲t̲ ̲h̲e̲r̲e̲")}
+        >
+          U̲n̲d̲e̲r̲l̲i̲n̲e̲ ̲T̲e̲x̲t̲
+        </button>
+        <button
+          onClick={() => changeText("upsidedown")}
+          onMouseEnter={() => setPlaceholder("ǝɹǝɥ ʇxǝʇ ɹnoʎ (ǝʇsɐd ɹo) ǝdʎ┴")}
+        >
+          ʇxǝ┴ uʍoD ǝpısd∩
+        </button>
+        <button
+          onClick={() => changeText("wide")}
+          onMouseEnter={() =>
+            setPlaceholder(
+              "Ｔｙｐｅ (ｏｒ ｐａｓｔｅ) ｙｏｕｒ ｔｅｘｔ ｈｅｒｅ"
+            )
+          }
+        >
+          Ｗｉｄｅ Ｔｅｘｔ
+        </button>
+        <button
+          onClick={() => changeText("morseencode")}
+          onMouseEnter={() =>
+            setPlaceholder(
+              "- -.-- .--. . / -.--. --- .-. / .--. .- ... - . -.--.- / -.-- --- ..- .-. / - . -..- - / .... . .-. ."
+            )
+          }
+        >
+          Morse Encode
+        </button>
+        <button
+          onClick={() => changeText("morsedecode")}
+          onMouseEnter={() =>
+            setPlaceholder(
+              "- -.-- .--. . / -.--. --- .-. / .--. .- ... - . -.--.- / -.-- --- ..- .-. / - . -..- - / .... . .-. ."
+            )
+          }
+        >
+          Morse Decode
+        </button>
       </div>
       <div className="otherButtons">
         <button onClick={() => changeText("copy")}>Copy to Clipboard</button>
