@@ -36,10 +36,12 @@ const Textarea = ({ text, setText }) => {
       >
         {text}
       </textarea>
-      <p>
-        Characters: <span>{characters}</span> | Words: <span>{words}</span> |
-        Lines: <span>{lines}</span>
-      </p>
+      <div className="textInfo">
+        <p>
+          Characters: <span>{characters}</span> | Words: <span>{words}</span> |
+          Lines: <span>{lines}</span>
+        </p>
+      </div>
     </SCTextarea>
   );
 };
@@ -65,6 +67,13 @@ const SCTextarea = styled.div`
       border: 0;
       box-shadow: 0 0 0 1.5pt #0060df;
     }
+  }
+
+  .textInfo {
+    display: flex;
+    align-items: center;
+    width: 95%;
+    height: 2.5rem;
   }
 `;
 

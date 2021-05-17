@@ -149,6 +149,11 @@ const SCButtons = styled.div`
       border: 0;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
       cursor: pointer;
+      transition: all 0.1s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
 
       &:active {
         transform: scale(0.97);
@@ -188,6 +193,11 @@ const SCButtons = styled.div`
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
       cursor: pointer;
       font-weight: 400;
+      transition: all 0.1s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
 
       &:active {
         transform: scale(0.97);
