@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortDown } from "@fortawesome/free-solid-svg-icons";
 import caseTransform from "../functions/caseTransform";
 import CaseOptions from "./options/CaseOptions";
-import ReverseOptions from "./options/reverseOptions";
+import ReverseOptions from "./options/ReverseOptions";
 import reverse from "../functions/reverse";
 
 const Textarea = ({
