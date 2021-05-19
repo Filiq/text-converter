@@ -34,9 +34,9 @@ const Settings = ({
     },
   };
 
-  const handleClick = (category, subcategory) => {
+  const handleClick = (category, subcategory, title) => {
     setOpenedSettings(false);
-    setConvertType({ ...convertType, category, subcategory });
+    setConvertType({ ...convertType, category, subcategory, title });
   };
 
   return (
@@ -58,23 +58,40 @@ const Settings = ({
           <SCOptions>
             <h3>Transform</h3>
             <div>
-              <button onClick={() => handleClick("case", "lower")}>
-                Case transform
+              <button
+                onClick={() => handleClick("case", "lower", "Case Transform")}
+              >
+                Case Transform
               </button>
-              <button>Numeral system</button>
-              <button>Replace</button>
-              <button onClick={() => handleClick("reverse", "")}>
+              <button
+                onClick={() =>
+                  handleClick("numeralSystem", "", "Numeral System")
+                }
+              >
+                Numeral System
+              </button>
+              <button onClick={() => handleClick("replace", "", "Replace")}>
+                Replace
+              </button>
+              <button onClick={() => handleClick("reverse", "", "Reverse")}>
                 Reverse
+              </button>
+              <button
+                onClick={() =>
+                  handleClick("unicode", "bold", "Unicode Transform")
+                }
+              >
+                Unicode Transform
               </button>
             </div>
           </SCOptions>
           <SCOptions>
             <h3>Alphabets</h3>
             <div>
-              <button>Morse code</button>
+              <button onClick={() => handleClick("morse", "encode", "Morse")}>
+                Morse code
+              </button>
               <button>Spelling alphabet</button>
-              <button>Replace</button>
-              <button>Reverse</button>
             </div>
           </SCOptions>
         </section>

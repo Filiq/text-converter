@@ -4,8 +4,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortDown } from "@fortawesome/free-solid-svg-icons";
 import caseTransform from "../functions/caseTransform";
 import CaseOptions from "./options/CaseOptions";
+import reverse from "../functions/reverse/reverse";
 import ReverseOptions from "./options/ReverseOptions";
-import reverse from "../functions/reverse";
+import morse from "../functions/morse";
+import MorseOptions from "./options/MorseOptions";
+import unicodeTransform from "../functions/unicodeTransform";
+import UnicodeOptions from "./options/UnicodeOptions";
+import replace from "../functions/replace";
+import ReplaceOptions from "./options/ReplaceOptions";
+import NumeralSystemOptions from "./options/NumeralSystemOptions";
 
 const Textarea = ({
   text,
@@ -21,16 +28,31 @@ const Textarea = ({
   const [characters, setCharacters] = useState(0);
   const [words, setWords] = useState(0);
   const [lines, setLines] = useState(0);
+  const [findValue, setFindValue] = useState("");
+  const [replaceValue, setReplaceValue] = useState("");
+  const [caseSensitivity, setCaseSensitivity] = useState(false);
+  const [fromSystem, setFromSystem] = useState("binary");
+  const [toSystem, setToSystem] = useState("binary");
+  const { category, subcategory, title } = convertType;
 
   useEffect(() => {
     let str = "";
 
-    switch (convertType.category) {
+    switch (category) {
       case "case":
-        str = caseTransform(text, convertType.subcategory);
+        str = caseTransform(text, subcategory);
         break;
       case "reverse":
         str = reverse(text);
+        break;
+      case "morse":
+        str = morse(text, subcategory);
+        break;
+      case "unicode":
+        str = unicodeTransform(text, subcategory);
+        break;
+      case "replace":
+        str = replace(text, findValue, replaceValue, caseSensitivity);
         break;
     }
 
@@ -52,7 +74,16 @@ const Textarea = ({
     setCharacters(text.split("").length);
     setWords(wordCount - spaces);
     setLines(lineCount);
-  }, [text, convertedText, convertType]);
+  }, [
+    text,
+    convertedText,
+    convertType,
+    findValue,
+    replaceValue,
+    caseSensitivity,
+    fromSystem,
+    toSystem,
+  ]);
 
   return (
     <SCTextarea>
@@ -68,13 +99,7 @@ const Textarea = ({
       </div>
       <div className="settings">
         <div className="headline">
-          <h3>
-            {convertType.category === "case"
-              ? "Case transform"
-              : convertType.category === "reverse"
-              ? "Reverse"
-              : ""}
-          </h3>
+          <h3>{title}</h3>
           <div
             className="settings-icon"
             onClick={() => setOpenedSettings(!openedSettings)}
@@ -83,13 +108,39 @@ const Textarea = ({
           </div>
         </div>
         <div className="options">
-          {convertType.category === "case" ? (
+          {category === "case" ? (
             <CaseOptions
               convertType={convertType}
               setConvertType={setConvertType}
             />
-          ) : convertType.category === "reverse" ? (
+          ) : category === "replace" ? (
+            <ReplaceOptions
+              findValue={findValue}
+              replaceValue={replaceValue}
+              setFindValue={setFindValue}
+              setReplaceValue={setReplaceValue}
+              caseSensitivity={caseSensitivity}
+              setCaseSensitivity={setCaseSensitivity}
+            />
+          ) : category === "reverse" ? (
             <ReverseOptions />
+          ) : category === "morse" ? (
+            <MorseOptions
+              convertType={convertType}
+              setConvertType={setConvertType}
+            />
+          ) : category === "numeralSystem" ? (
+            <NumeralSystemOptions
+              fromSystem={fromSystem}
+              setFromSystem={setFromSystem}
+              toSystem={toSystem}
+              setToSystem={setToSystem}
+            />
+          ) : category === "unicode" ? (
+            <UnicodeOptions
+              convertType={convertType}
+              setConvertType={setConvertType}
+            />
           ) : (
             <></>
           )}
@@ -192,7 +243,7 @@ const SCTextarea = styled.div`
       flex-direction: column;
       align-items: flex-start;
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-      padding: 0.5rem 0.5rem 0.5rem 0.75rem;
+      padding: 0.5rem 0.75rem 0.5rem 0.75rem;
       background: ${(props) => props.theme.textareaBackground};
       min-height: 7.5rem;
 
@@ -207,6 +258,48 @@ const SCTextarea = styled.div`
 
         input {
           margin-right: 0.5rem;
+        }
+      }
+
+      .option-text {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        label {
+          margin: 0.5rem 0 0.25rem 0;
+        }
+
+        input {
+          height: 2rem;
+          padding: 0.5rem 0.25rem;
+          font-size: 1rem;
+          width: 100%;
+          border: 1px solid rgba(0, 0, 0, 0.4);
+
+          &:focus {
+            border: 1px solid rgba(0, 0, 0, 0.4);
+            outline: 0;
+          }
+        }
+      }
+
+      .option-no-yes {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        label {
+          margin: 0.5rem 0 0.25rem 0;
+        }
+
+        p {
+          margin: 0.5rem 0;
+
+          span {
+            margin-right: 0.5rem;
+            cursor: pointer;
+          }
         }
       }
     }
