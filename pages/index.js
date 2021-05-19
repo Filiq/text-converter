@@ -3,7 +3,6 @@ import styled, { ThemeProvider } from "styled-components";
 import { useState } from "react";
 import Settings from "../components/Settings";
 import Textarea from "../components/Textarea";
-import Buttons from "../components/Buttons";
 
 export default function Home() {
   const theme = {
@@ -17,6 +16,7 @@ export default function Home() {
   const [convertType, setConvertType] = useState({
     category: "case",
     subcategory: "lower",
+    title: "Case Transform",
   });
 
   return (
@@ -40,7 +40,6 @@ export default function Home() {
           convertType={convertType}
           setConvertType={setConvertType}
         />
-        <Buttons text={text} setText={setText} />
       </SCMain>
     </ThemeProvider>
   );
@@ -56,5 +55,9 @@ const SCMain = styled.main`
   .main-headline {
     width: 95%;
     margin: 2.5rem 0;
+
+    h2 {
+      color: ${(props) => props.theme.textareaBackground};
+    }
   }
 `;
