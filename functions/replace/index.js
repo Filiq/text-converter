@@ -1,5 +1,7 @@
-const replace = (str, findValue, replaceValue, caseSensitivity) => {
-  if (str === "" || findValue === "") return str;
+const replace = (str, subcategory) => {
+  const { findValue, replaceValue, caseSensitivity } = subcategory;
+
+  if (str === "" || findValue === "") return "";
 
   const regex = new RegExp(
     caseSensitivity ? findValue : findValue.toLowerCase(),

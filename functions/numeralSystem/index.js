@@ -1,5 +1,7 @@
-const numeralSystem = (str, from, to) => {
+const numeralSystem = (str, type) => {
   if (str === "" || isNaN(parseInt(str, 16))) return "";
+
+  const { from, to } = type;
 
   return parseInt(
     str,
