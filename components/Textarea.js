@@ -241,6 +241,16 @@ const SCTextarea = styled.div`
       background: ${(props) => props.theme.textareaBackground};
       min-height: 7.5rem;
 
+      .option-short-text-container {
+        max-width: 18rem;
+        display: flex;
+
+        div {
+          display: flex;
+          align-items: center;
+        }
+      }
+
       h4 {
         padding: 0.5rem 0;
       }

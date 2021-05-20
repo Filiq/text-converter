@@ -100,7 +100,15 @@ const Settings = ({
           <SCOptions>
             <h3>Alphabets</h3>
             <div>
-              <button onClick={() => handleClick("morse", "encode", "Morse")}>
+              <button
+                onClick={() =>
+                  handleClick(
+                    "morse",
+                    { type: "encode", short: ".", long: "-", space: "/" },
+                    "Morse"
+                  )
+                }
+              >
                 Morse code
               </button>
               <button
