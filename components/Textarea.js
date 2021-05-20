@@ -31,11 +31,6 @@ const Textarea = ({
   const [characters, setCharacters] = useState(0);
   const [words, setWords] = useState(0);
   const [lines, setLines] = useState(0);
-  const [findValue, setFindValue] = useState("");
-  const [replaceValue, setReplaceValue] = useState("");
-  const [caseSensitivity, setCaseSensitivity] = useState(false);
-  const [fromSystem, setFromSystem] = useState("binary");
-  const [toSystem, setToSystem] = useState("binary");
   const { category, subcategory, title } = convertType;
 
   useEffect(() => {
@@ -55,13 +50,13 @@ const Textarea = ({
         str = morse(text, subcategory);
         break;
       case "numeralSystem":
-        str = numeralSystem(text, fromSystem, toSystem);
+        str = numeralSystem(text, subcategory);
         break;
       case "unicode":
         str = unicodeTransform(text, subcategory);
         break;
       case "replace":
-        str = replace(text, findValue, replaceValue, caseSensitivity);
+        str = replace(text, subcategory);
         break;
     }
 
@@ -83,16 +78,7 @@ const Textarea = ({
     setCharacters(text.split("").length);
     setWords(wordCount - spaces);
     setLines(lineCount);
-  }, [
-    text,
-    convertedText,
-    convertType,
-    findValue,
-    replaceValue,
-    caseSensitivity,
-    fromSystem,
-    toSystem,
-  ]);
+  }, [text, convertedText, convertType]);
 
   return (
     <SCTextarea>
@@ -129,12 +115,8 @@ const Textarea = ({
             />
           ) : category === "replace" ? (
             <ReplaceOptions
-              findValue={findValue}
-              replaceValue={replaceValue}
-              setFindValue={setFindValue}
-              setReplaceValue={setReplaceValue}
-              caseSensitivity={caseSensitivity}
-              setCaseSensitivity={setCaseSensitivity}
+              convertType={convertType}
+              setConvertType={setConvertType}
             />
           ) : category === "reverse" ? (
             <ReverseOptions />
@@ -145,10 +127,8 @@ const Textarea = ({
             />
           ) : category === "numeralSystem" ? (
             <NumeralSystemOptions
-              fromSystem={fromSystem}
-              setFromSystem={setFromSystem}
-              toSystem={toSystem}
-              setToSystem={setToSystem}
+              convertType={convertType}
+              setConvertType={setConvertType}
             />
           ) : category === "unicode" ? (
             <UnicodeOptions

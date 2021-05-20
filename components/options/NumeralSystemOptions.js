@@ -1,9 +1,4 @@
-const NumeralSystemOptions = ({
-  fromSystem,
-  setFromSystem,
-  toSystem,
-  setToSystem,
-}) => {
+const NumeralSystemOptions = ({ convertType, setConvertType }) => {
   return (
     <>
       <h4>From</h4>
@@ -13,8 +8,13 @@ const NumeralSystemOptions = ({
           name="from"
           id="binaryFrom"
           value="Binary"
-          onChange={() => setFromSystem("binary")}
-          checked={fromSystem === "binary"}
+          onChange={() =>
+            setConvertType({
+              ...convertType,
+              subcategory: { from: "binary", to: convertType.subcategory.to },
+            })
+          }
+          checked={convertType.subcategory.from === "binary"}
         />
         <label htmlFor="binaryFrom">Binary (2)</label>
       </div>
@@ -24,8 +24,13 @@ const NumeralSystemOptions = ({
           name="from"
           id="octalFrom"
           value="Octal"
-          onChange={() => setFromSystem("octal")}
-          checked={fromSystem === "octal"}
+          onChange={() =>
+            setConvertType({
+              ...convertType,
+              subcategory: { from: "octal", to: convertType.subcategory.to },
+            })
+          }
+          checked={convertType.subcategory.from === "octal"}
         />
         <label htmlFor="octalFrom">Octal (8)</label>
       </div>
@@ -35,8 +40,13 @@ const NumeralSystemOptions = ({
           name="from"
           id="decimalFrom"
           value="Decimal"
-          onChange={() => setFromSystem("decimal")}
-          checked={fromSystem === "decimal"}
+          onChange={() =>
+            setConvertType({
+              ...convertType,
+              subcategory: { from: "decimal", to: convertType.subcategory.to },
+            })
+          }
+          checked={convertType.subcategory.from === "decimal"}
         />
         <label htmlFor="decimalFrom">Decimal (10)</label>
       </div>
@@ -46,8 +56,16 @@ const NumeralSystemOptions = ({
           name="from"
           id="hexadecimalFrom"
           value="Hexadecimal"
-          onChange={() => setFromSystem("hexadecimal")}
-          checked={fromSystem === "hexadecimal"}
+          onChange={() =>
+            setConvertType({
+              ...convertType,
+              subcategory: {
+                from: "hexadecimal",
+                to: convertType.subcategory.to,
+              },
+            })
+          }
+          checked={convertType.subcategory.from === "hexadecimal"}
         />
         <label htmlFor="hexadecimalFrom">Hexadecimal (16)</label>
       </div>
@@ -58,8 +76,16 @@ const NumeralSystemOptions = ({
           name="to"
           id="binaryTo"
           value="Binary"
-          onChange={() => setToSystem("binary")}
-          checked={toSystem === "binary"}
+          onChange={() =>
+            setConvertType({
+              ...convertType,
+              subcategory: {
+                from: convertType.subcategory.from,
+                to: "binary",
+              },
+            })
+          }
+          checked={convertType.subcategory.to === "binary"}
         />
         <label htmlFor="binaryTo">Binary (2)</label>
       </div>
@@ -69,8 +95,16 @@ const NumeralSystemOptions = ({
           name="to"
           id="octalTo"
           value="Octal"
-          onChange={() => setToSystem("octal")}
-          checked={toSystem === "octal"}
+          onChange={() =>
+            setConvertType({
+              ...convertType,
+              subcategory: {
+                from: convertType.subcategory.from,
+                to: "octal",
+              },
+            })
+          }
+          checked={convertType.subcategory.to === "octal"}
         />
         <label htmlFor="octalTo">Octal (8)</label>
       </div>
@@ -80,8 +114,16 @@ const NumeralSystemOptions = ({
           name="to"
           id="decimalTo"
           value="Decimal"
-          onChange={() => setToSystem("decimal")}
-          checked={toSystem === "decimal"}
+          onChange={() =>
+            setConvertType({
+              ...convertType,
+              subcategory: {
+                from: convertType.subcategory.from,
+                to: "decimal",
+              },
+            })
+          }
+          checked={convertType.subcategory.to === "decimal"}
         />
         <label htmlFor="decimalTo">Decimal (10)</label>
       </div>
@@ -91,8 +133,16 @@ const NumeralSystemOptions = ({
           name="to"
           id="hexadecimalTo"
           value="Hexadecimal"
-          onChange={() => setToSystem("hexadecimal")}
-          checked={toSystem === "hexadecimal"}
+          onChange={() =>
+            setConvertType({
+              ...convertType,
+              subcategory: {
+                from: convertType.subcategory.from,
+                to: "hexadecimal",
+              },
+            })
+          }
+          checked={convertType.subcategory.to === "hexadecimal"}
         />
         <label htmlFor="hexadecimalTo">Hexadecimal (16)</label>
       </div>

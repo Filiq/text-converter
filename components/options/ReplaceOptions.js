@@ -1,11 +1,4 @@
-const ReplaceOptions = ({
-  findValue,
-  replaceValue,
-  setFindValue,
-  setReplaceValue,
-  caseSensitivity,
-  setCaseSensitivity,
-}) => {
+const ReplaceOptions = ({ convertType, setConvertType }) => {
   return (
     <>
       <h4>Replace</h4>
@@ -15,8 +8,17 @@ const ReplaceOptions = ({
           type="text"
           name="find"
           id="find"
-          value={findValue}
-          onChange={(e) => setFindValue(e.target.value)}
+          value={convertType.subcategory.findValue}
+          onChange={(e) =>
+            setConvertType({
+              ...convertType,
+              subcategory: {
+                findValue: e.target.value,
+                replaceValue: convertType.subcategory.replaceValue,
+                caseSensitivity: convertType.subcategory.caseSensitivity,
+              },
+            })
+          }
         />
       </div>
       <div className="option-text">
@@ -25,18 +27,49 @@ const ReplaceOptions = ({
           type="text"
           name="replace"
           id="replace"
-          value={replaceValue}
-          onChange={(e) => setReplaceValue(e.target.value)}
+          value={convertType.subcategory.replaceValue}
+          onChange={(e) =>
+            setConvertType({
+              ...convertType,
+              subcategory: {
+                findValue: convertType.subcategory.findValue,
+                replaceValue: e.target.value,
+                caseSensitivity: convertType.subcategory.caseSensitivity,
+              },
+            })
+          }
         />
       </div>
       <div className="option-no-yes">
         <label htmlFor="replace">Case Sensitivity</label>
         <p>
-          <span onClick={() => setCaseSensitivity(false)}>
-            {caseSensitivity ? "No" : <b>No</b>}
+          <span
+            onClick={() =>
+              setConvertType({
+                ...convertType,
+                subcategory: {
+                  findValue: convertType.subcategory.findValue,
+                  replaceValue: convertType.subcategory.replaceValue,
+                  caseSensitivity: false,
+                },
+              })
+            }
+          >
+            {convertType.subcategory.caseSensitivity ? "No" : <b>No</b>}
           </span>
-          <span onClick={() => setCaseSensitivity(true)}>
-            {caseSensitivity ? <b>Yes</b> : "Yes"}
+          <span
+            onClick={() =>
+              setConvertType({
+                ...convertType,
+                subcategory: {
+                  findValue: convertType.subcategory.findValue,
+                  replaceValue: convertType.subcategory.replaceValue,
+                  caseSensitivity: true,
+                },
+              })
+            }
+          >
+            {convertType.subcategory.caseSensitivity ? <b>Yes</b> : "Yes"}
           </span>
         </p>
       </div>

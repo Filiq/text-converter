@@ -65,12 +65,24 @@ const Settings = ({
               </button>
               <button
                 onClick={() =>
-                  handleClick("numeralSystem", "", "Numeral System")
+                  handleClick(
+                    "numeralSystem",
+                    { from: "binary", to: "binary" },
+                    "Numeral System"
+                  )
                 }
               >
                 Numeral System
               </button>
-              <button onClick={() => handleClick("replace", "", "Replace")}>
+              <button
+                onClick={() =>
+                  handleClick(
+                    "replace",
+                    { findValue: "", replaceValue: "", caseSensitivity: false },
+                    "Replace"
+                  )
+                }
+              >
                 Replace
               </button>
               <button onClick={() => handleClick("reverse", "", "Reverse")}>
