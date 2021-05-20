@@ -11,90 +11,90 @@ const NumeralSystemOptions = ({
         <input
           type="radio"
           name="from"
-          id="binary"
+          id="binaryFrom"
           value="Binary"
           onChange={() => setFromSystem("binary")}
           checked={fromSystem === "binary"}
         />
-        <label htmlFor="binary">Binary (2)</label>
+        <label htmlFor="binaryFrom">Binary (2)</label>
       </div>
       <div className="option-radio">
         <input
           type="radio"
           name="from"
-          id="octal"
+          id="octalFrom"
           value="Octal"
           onChange={() => setFromSystem("octal")}
           checked={fromSystem === "octal"}
         />
-        <label htmlFor="octal">Octal (8)</label>
+        <label htmlFor="octalFrom">Octal (8)</label>
       </div>
       <div className="option-radio">
         <input
           type="radio"
           name="from"
-          id="decimal"
+          id="decimalFrom"
           value="Decimal"
           onChange={() => setFromSystem("decimal")}
           checked={fromSystem === "decimal"}
         />
-        <label htmlFor="decimal">Decimal (10)</label>
+        <label htmlFor="decimalFrom">Decimal (10)</label>
       </div>
       <div className="option-radio">
         <input
           type="radio"
           name="from"
-          id="hexadecimal"
+          id="hexadecimalFrom"
           value="Hexadecimal"
           onChange={() => setFromSystem("hexadecimal")}
           checked={fromSystem === "hexadecimal"}
         />
-        <label htmlFor="hexadecimal">Hexadecimal (16)</label>
+        <label htmlFor="hexadecimalFrom">Hexadecimal (16)</label>
       </div>
       <h4>To</h4>
       <div className="option-radio">
         <input
           type="radio"
           name="to"
-          id="binary"
+          id="binaryTo"
           value="Binary"
           onChange={() => setToSystem("binary")}
           checked={toSystem === "binary"}
         />
-        <label htmlFor="binary">Binary (2)</label>
+        <label htmlFor="binaryTo">Binary (2)</label>
       </div>
       <div className="option-radio">
         <input
           type="radio"
           name="to"
-          id="octal"
+          id="octalTo"
           value="Octal"
           onChange={() => setToSystem("octal")}
           checked={toSystem === "octal"}
         />
-        <label htmlFor="octal">Octal (8)</label>
+        <label htmlFor="octalTo">Octal (8)</label>
       </div>
       <div className="option-radio">
         <input
           type="radio"
           name="to"
-          id="decimal"
+          id="decimalTo"
           value="Decimal"
           onChange={() => setToSystem("decimal")}
           checked={toSystem === "decimal"}
         />
-        <label htmlFor="decimal">Decimal (10)</label>
+        <label htmlFor="decimalTo">Decimal (10)</label>
       </div>
       <div className="option-radio">
         <input
           type="radio"
           name="to"
-          id="hexadecimal"
+          id="hexadecimalTo"
           value="Hexadecimal"
           onChange={() => setToSystem("hexadecimal")}
           checked={toSystem === "hexadecimal"}
         />
-        <label htmlFor="hexadecimal">Hexadecimal (16)</label>
+        <label htmlFor="hexadecimalTo">Hexadecimal (16)</label>
       </div>
     </>
   );

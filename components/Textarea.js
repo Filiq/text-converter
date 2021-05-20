@@ -12,7 +12,10 @@ import unicodeTransform from "../functions/unicodeTransform";
 import UnicodeOptions from "./options/UnicodeOptions";
 import replace from "../functions/replace";
 import ReplaceOptions from "./options/ReplaceOptions";
+import numeralSystem from "../functions/numeralSystem";
 import NumeralSystemOptions from "./options/NumeralSystemOptions";
+import alphabestSpelling from "../functions/alphabetSpelling";
+import AlphabetOptions from "./options/AlphabetOptions";
 
 const Textarea = ({
   text,
@@ -39,6 +42,9 @@ const Textarea = ({
     let str = "";
 
     switch (category) {
+      case "alphabet":
+        str = alphabestSpelling(text, subcategory);
+        break;
       case "case":
         str = caseTransform(text, subcategory);
         break;
@@ -47,6 +53,9 @@ const Textarea = ({
         break;
       case "morse":
         str = morse(text, subcategory);
+        break;
+      case "numeralSystem":
+        str = numeralSystem(text, fromSystem, toSystem);
         break;
       case "unicode":
         str = unicodeTransform(text, subcategory);
@@ -108,7 +117,12 @@ const Textarea = ({
           </div>
         </div>
         <div className="options">
-          {category === "case" ? (
+          {category === "alphabet" ? (
+            <AlphabetOptions
+              convertType={convertType}
+              setConvertType={setConvertType}
+            />
+          ) : category === "case" ? (
             <CaseOptions
               convertType={convertType}
               setConvertType={setConvertType}

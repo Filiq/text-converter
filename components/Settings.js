@@ -91,7 +91,13 @@ const Settings = ({
               <button onClick={() => handleClick("morse", "encode", "Morse")}>
                 Morse code
               </button>
-              <button>Spelling alphabet</button>
+              <button
+                onClick={() =>
+                  handleClick("alphabet", "nato", "Alphabet Spelling")
+                }
+              >
+                Alphabet Spelling
+              </button>
             </div>
           </SCOptions>
         </section>
