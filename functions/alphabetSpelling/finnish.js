@@ -4,7 +4,7 @@ const finnish = (str) => {
     Å: "Åke",
     Ä: "Äiti",
     B: "Bertta",
-    C: "Celsius	",
+    C: "Celsius",
     D: "Daavid",
     E: "Eemeli",
     F: "Faarao",
