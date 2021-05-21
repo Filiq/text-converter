@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSortDown } from "@fortawesome/free-solid-svg-icons";
+import { faSortDown, faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
+import counters from "../functions/counters";
 import caseTransform from "../functions/caseTransform";
 import CaseOptions from "./options/CaseOptions";
 import reverse from "../functions/reverse/reverse";
@@ -25,15 +26,26 @@ const Textarea = ({
   convertType,
   setConvertType,
 }) => {
+  const textareaFrom = useRef(null);
+  const textareaTo = useRef(null);
   const [convertedText, setConvertedText] = useState("");
-  const textareaFromRef = useRef(null);
-  const textareaToRef = useRef(null);
   const [characters, setCharacters] = useState(0);
   const [words, setWords] = useState(0);
   const [lines, setLines] = useState(0);
   const { category, subcategory, title } = convertType;
 
   useEffect(() => {
+    setCharacters(counters(text, "chars"));
+    setWords(counters(text, "words"));
+    setLines(counters(text, "lines"));
+
+    textareaFrom.current.style.minHeight = "10rem";
+    textareaFrom.current.style.minHeight =
+      textareaFrom.current.scrollHeight + "px";
+
+    textareaTo.current.style.minHeight = "10rem";
+    textareaTo.current.style.minHeight = textareaTo.current.scrollHeight + "px";
+
     let str = "";
 
     switch (category) {
@@ -61,45 +73,57 @@ const Textarea = ({
     }
 
     setConvertedText(str);
-
-    let lineCount =
-      text === "" ? 0 : textareaFromRef.current.value.split("\n").length;
-    let wordCount = 0;
-    let spaces = 0;
-    text.split("\n").forEach((line) => {
-      line.split(" ").forEach((word) => {
-        if (word === "") {
-          spaces++;
-        }
-      });
-
-      wordCount += line.split(" ").length;
-    });
-    setCharacters(text.split("").length);
-    setWords(wordCount - spaces);
-    setLines(lineCount);
   }, [text, convertedText, convertType]);
+
+  const swapText = () => {
+    let temp = text;
+    setText(convertedText);
+    setConvertedText(temp);
+  };
+
+  const removeExtraSpaces = () => {
+    setText(text.replace(/\s+/g, " ").trim());
+  };
+
+  const clearText = () => {
+    setText("");
+  };
 
   return (
     <SCTextarea>
       <div className="from">
         <div className="headline">
-          <h3>From</h3>
+          <div className="from-headline">
+            <h3>From</h3>
+            <div>
+              <button onClick={removeExtraSpaces}>Remove Extra Spaces</button>
+              <button onClick={clearText}>Clear</button>
+            </div>
+          </div>
         </div>
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
-          ref={textareaFromRef}
+          ref={textareaFrom}
         ></textarea>
       </div>
       <div className="settings">
         <div className="headline">
           <h3>{title}</h3>
-          <div
-            className="settings-icon"
-            onClick={() => setOpenedSettings(!openedSettings)}
-          >
-            <FontAwesomeIcon icon={faSortDown} size="2x" />
+          <div className="icons">
+            <div className="swap-icon">
+              <FontAwesomeIcon
+                icon={faExchangeAlt}
+                size="2x"
+                onClick={swapText}
+              />
+            </div>
+            <div
+              className="settings-icon"
+              onClick={() => setOpenedSettings(!openedSettings)}
+            >
+              <FontAwesomeIcon icon={faSortDown} size="3x" />
+            </div>
           </div>
         </div>
         <div className="options">
@@ -153,7 +177,7 @@ const Textarea = ({
         <textarea
           value={convertedText}
           onChange={(e) => setConvertedText(e.target.value)}
-          ref={textareaToRef}
+          ref={textareaTo}
         ></textarea>
       </div>
     </SCTextarea>
@@ -176,19 +200,69 @@ const SCTextarea = styled.div`
 
     .headline {
       height: 2.5rem;
-      padding-left: 0.75rem;
+      padding: 0 0.75rem;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
-      .settings-icon {
-        padding-right: 0.75rem;
-        cursor: pointer;
+      .from-headline {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
 
-        svg {
-          margin-bottom: 0.75rem;
+        div {
+          button {
+            border: 0;
+            padding: 0.4rem 0.75rem;
+            margin-left: 0.5rem;
+            background: ${(props) => props.theme.background};
+            color: ${(props) => props.theme.textareaBackground};
+            font-family: inherit;
+            border-radius: 0.25rem;
+            cursor: pointer;
+
+            &:hover {
+              opacity: 0.925;
+            }
+
+            &:active {
+              transform: scale(0.975);
+            }
+          }
+        }
+      }
+
+      .icons {
+        display: flex;
+        align-items: center;
+
+        .settings-icon {
+          cursor: pointer;
+
+          &:hover {
+            opacity: 0.9;
+          }
+
+          svg {
+            margin-bottom: 1.25rem;
+            color: ${(props) => props.theme.background};
+          }
+        }
+
+        .swap-icon {
+          cursor: pointer;
+          margin-right: 1rem;
+
+          &:hover {
+            opacity: 0.9;
+          }
+
+          svg {
+            color: ${(props) => props.theme.background};
+          }
         }
       }
     }
