@@ -11,7 +11,7 @@ const Settings = ({
 }) => {
   const settingsVariants = {
     hidden: {
-      y: -230,
+      y: -330,
       x: "-50%",
       transition: {
         ease: "easeOut",
@@ -117,6 +117,15 @@ const Settings = ({
                 }
               >
                 Alphabet Spelling
+              </button>
+            </div>
+          </SCOptions>
+          <SCOptions>
+            <h3>Encoding</h3>
+            <div>
+              <button>Base32</button>
+              <button onClick={() => handleClick("base64", "encode", "Base64")}>
+                Base64
               </button>
             </div>
           </SCOptions>

@@ -17,6 +17,8 @@ import numeralSystem from "../functions/numeralSystem";
 import NumeralSystemOptions from "./options/NumeralSystemOptions";
 import alphabestSpelling from "../functions/alphabetSpelling";
 import AlphabetOptions from "./options/AlphabetOptions";
+import Base64Options from "./options/Base64Options";
+import base64 from "../functions/base64";
 
 const Textarea = ({
   text,
@@ -51,6 +53,9 @@ const Textarea = ({
     switch (category) {
       case "alphabet":
         str = alphabestSpelling(text, subcategory);
+        break;
+      case "base64":
+        str = base64(text, subcategory);
         break;
       case "case":
         str = caseTransform(text, subcategory);
@@ -129,6 +134,11 @@ const Textarea = ({
         <div className="options">
           {category === "alphabet" ? (
             <AlphabetOptions
+              convertType={convertType}
+              setConvertType={setConvertType}
+            />
+          ) : category === "base64" ? (
+            <Base64Options
               convertType={convertType}
               setConvertType={setConvertType}
             />
