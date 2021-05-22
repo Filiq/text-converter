@@ -45,7 +45,7 @@ const MorseOptions = ({ convertType, setConvertType }) => {
         <label htmlFor="decode">Decode</label>
       </div>
       <div className="option-short-text-container">
-        <div className="option-text">
+        <div className="option-long">
           <label htmlFor="short">Short</label>
           <input
             type="text"
@@ -65,7 +65,7 @@ const MorseOptions = ({ convertType, setConvertType }) => {
             }
           />
         </div>
-        <div className="option-text">
+        <div className="option-long">
           <label htmlFor="long">Long</label>
           <input
             type="text"
@@ -85,7 +85,7 @@ const MorseOptions = ({ convertType, setConvertType }) => {
             }
           />
         </div>
-        <div className="option-text">
+        <div className="option-long">
           <label htmlFor="space">Space</label>
           <input
             type="text"

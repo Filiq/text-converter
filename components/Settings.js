@@ -11,7 +11,7 @@ const Settings = ({
 }) => {
   const settingsVariants = {
     hidden: {
-      y: -330,
+      y: -420,
       x: "-50%",
       transition: {
         ease: "easeOut",
@@ -121,9 +121,29 @@ const Settings = ({
             </div>
           </SCOptions>
           <SCOptions>
+            <h3>Ciphers</h3>
+            <div>
+              <button
+                onClick={() =>
+                  handleClick(
+                    "caesarCipher",
+                    {
+                      type: "encode",
+                      shift: 5,
+                      alphabet: "abcdefghijklmnopqrstuvwxyz",
+                      ignoreCase: true,
+                    },
+                    "Caesar Cipher"
+                  )
+                }
+              >
+                Caesar Cipher
+              </button>
+            </div>
+          </SCOptions>
+          <SCOptions>
             <h3>Encoding</h3>
             <div>
-              <button>Base32</button>
               <button onClick={() => handleClick("base64", "encode", "Base64")}>
                 Base64
               </button>

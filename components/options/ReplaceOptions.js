@@ -2,7 +2,7 @@ const ReplaceOptions = ({ convertType, setConvertType }) => {
   return (
     <>
       <h4>Replace</h4>
-      <div className="option-text">
+      <div className="option-long">
         <label htmlFor="find">Find</label>
         <input
           type="text"
@@ -21,7 +21,7 @@ const ReplaceOptions = ({ convertType, setConvertType }) => {
           }
         />
       </div>
-      <div className="option-text">
+      <div className="option-long">
         <label htmlFor="replace">Replace</label>
         <input
           type="text"

@@ -19,6 +19,8 @@ import alphabestSpelling from "../functions/alphabetSpelling";
 import AlphabetOptions from "./options/AlphabetOptions";
 import Base64Options from "./options/Base64Options";
 import base64 from "../functions/base64";
+import caesarCipher from "../functions/caesarCipher";
+import CaesarCipherOptions from "./options/CaesarCipherOptions";
 
 const Textarea = ({
   text,
@@ -56,6 +58,9 @@ const Textarea = ({
         break;
       case "base64":
         str = base64(text, subcategory);
+        break;
+      case "caesarCipher":
+        str = caesarCipher(text, subcategory);
         break;
       case "case":
         str = caseTransform(text, subcategory);
@@ -139,6 +144,11 @@ const Textarea = ({
             />
           ) : category === "base64" ? (
             <Base64Options
+              convertType={convertType}
+              setConvertType={setConvertType}
+            />
+          ) : category === "caesarCipher" ? (
+            <CaesarCipherOptions
               convertType={convertType}
               setConvertType={setConvertType}
             />
@@ -349,7 +359,7 @@ const SCTextarea = styled.div`
         }
       }
 
-      .option-text {
+      .option-long {
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -368,6 +378,41 @@ const SCTextarea = styled.div`
           &:focus {
             border: 1px solid rgba(0, 0, 0, 0.4);
             outline: 0;
+          }
+        }
+      }
+
+      .option-number {
+        display: flex;
+        position: relative;
+
+        .number-description {
+          position: absolute;
+          top: 50%;
+          left: 72.5%;
+          transform: translateY(-50%);
+        }
+
+        input {
+          width: calc(100% - 4rem);
+          border-top: 1px solid rgba(0, 0, 0, 0.4);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+          border-left: 0;
+          border-right: 0;
+        }
+
+        button {
+          width: 2rem;
+          background: ${(props) => props.theme.menuBackground};
+          border: 1px solid rgba(0, 0, 0, 0.4);
+          cursor: pointer;
+
+          &:hover {
+            opacity: 0.9;
+          }
+
+          &:active {
+            transform: scale(0.965);
           }
         }
       }
