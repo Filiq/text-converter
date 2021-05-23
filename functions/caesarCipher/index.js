@@ -8,9 +8,19 @@ const caesarCipher = (str, subcategory) => {
 
   switch (type) {
     case "encode":
-      return caesarCipherEncode(str, shift, alphabet, ignoreCase);
+      return caesarCipherEncode(
+        str,
+        shift === "-" || shift === "" ? 0 : shift,
+        alphabet,
+        ignoreCase
+      );
     case "decode":
-      return caesarCipherDecode(str, shift, alphabet, ignoreCase);
+      return caesarCipherDecode(
+        str,
+        shift === "-" || shift === "" ? 0 : shift,
+        alphabet,
+        ignoreCase
+      );
     default:
       return str;
   }
