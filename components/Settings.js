@@ -142,6 +142,21 @@ const Settings = ({
               <button
                 onClick={() =>
                   handleClick(
+                    "baconCipher",
+                    {
+                      type: "encode",
+                      letter1: "a",
+                      letter2: "b",
+                    },
+                    "Bacon Cipher"
+                  )
+                }
+              >
+                Bacon Cipher
+              </button>
+              <button
+                onClick={() =>
+                  handleClick(
                     "caesarCipher",
                     {
                       type: "encode",

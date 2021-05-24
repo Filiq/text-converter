@@ -23,6 +23,8 @@ import caesarCipher from "../functions/caesarCipher";
 import CaesarCipherOptions from "./options/CaesarCipherOptions";
 import a1z26 from "../functions/a1z26";
 import A1z26Options from "./options/A1z26Options";
+import baconCipher from "../functions/baconCipher";
+import BaconCipherOptions from "./options/BaconCipherOptions";
 
 const Textarea = ({
   text,
@@ -60,6 +62,9 @@ const Textarea = ({
         break;
       case "a1z26":
         str = a1z26(text, subcategory);
+        break;
+      case "baconCipher":
+        str = baconCipher(text, subcategory);
         break;
       case "base64":
         str = base64(text, subcategory);
@@ -149,6 +154,11 @@ const Textarea = ({
             />
           ) : category === "a1z26" ? (
             <A1z26Options
+              convertType={convertType}
+              setConvertType={setConvertType}
+            />
+          ) : category === "baconCipher" ? (
+            <BaconCipherOptions
               convertType={convertType}
               setConvertType={setConvertType}
             />
@@ -350,7 +360,7 @@ const SCTextarea = styled.div`
       }
 
       .option-short-text-container {
-        max-width: 18rem;
+        max-width: 21rem;
         display: flex;
 
         div {
