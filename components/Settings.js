@@ -126,6 +126,22 @@ const Settings = ({
               <button
                 onClick={() =>
                   handleClick(
+                    "a1z26",
+                    {
+                      type: "encode",
+                      separator: " ",
+                      alphabet: "abcdefghijklmnopqrstuvwxyz",
+                      ignoreCase: true,
+                    },
+                    "A1Z26"
+                  )
+                }
+              >
+                A1Z26
+              </button>
+              <button
+                onClick={() =>
+                  handleClick(
                     "caesarCipher",
                     {
                       type: "encode",

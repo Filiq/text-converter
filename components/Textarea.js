@@ -21,6 +21,8 @@ import Base64Options from "./options/Base64Options";
 import base64 from "../functions/base64";
 import caesarCipher from "../functions/caesarCipher";
 import CaesarCipherOptions from "./options/CaesarCipherOptions";
+import a1z26 from "../functions/a1z26";
+import A1z26Options from "./options/A1z26Options";
 
 const Textarea = ({
   text,
@@ -55,6 +57,9 @@ const Textarea = ({
     switch (category) {
       case "alphabet":
         str = alphabestSpelling(text, subcategory);
+        break;
+      case "a1z26":
+        str = a1z26(text, subcategory);
         break;
       case "base64":
         str = base64(text, subcategory);
@@ -139,6 +144,11 @@ const Textarea = ({
         <div className="options">
           {category === "alphabet" ? (
             <AlphabetOptions
+              convertType={convertType}
+              setConvertType={setConvertType}
+            />
+          ) : category === "a1z26" ? (
+            <A1z26Options
               convertType={convertType}
               setConvertType={setConvertType}
             />
@@ -312,7 +322,7 @@ const SCTextarea = styled.div`
   .settings {
     display: flex;
     flex-direction: column;
-    min-width: 20rem;
+    min-width: 22.5rem;
     min-height: 12.5rem;
     margin: 0 5rem;
 
