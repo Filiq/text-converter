@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 const CaesarCipherOptions = ({ convertType, setConvertType }) => {
   const formatShift = (num) => {
     if (num > convertType.subcategory.alphabet.length - 1) {
@@ -10,6 +12,32 @@ const CaesarCipherOptions = ({ convertType, setConvertType }) => {
 
     return num;
   };
+
+  const [error, setError] = useState({ active: false, msg: "" });
+
+  useEffect(() => {
+    if (convertType.subcategory.alphabet.length < 2)
+      return setError({
+        active: true,
+        msg: "Value must be at least 2 chars long",
+      });
+
+    if (convertType.subcategory.ignoreCase) {
+      const sorted = convertType.subcategory.alphabet.toLowerCase().split("");
+
+      for (let i = 0; i < sorted.length; i++) {
+        if (sorted[i] === sorted[i + 1]) {
+          return setError({
+            active: true,
+            msg: "Value cannot contains duplicate chars",
+          });
+        }
+      }
+    }
+
+    setError({ active: false, msg: "" });
+  }, [convertType]);
+
   return (
     <>
       <h4>Caesar Cipher</h4>
@@ -99,14 +127,20 @@ const CaesarCipherOptions = ({ convertType, setConvertType }) => {
               })
             }
           />
-          <span className="number-description">
-            {convertType.subcategory.alphabet[0]}→
-            {
-              convertType.subcategory.alphabet[
-                formatShift(convertType.subcategory.shift)
-              ]
-            }
-          </span>
+          {error.active ||
+          convertType.subcategory.shift === "" ||
+          convertType.subcategory.shift === "-" ? (
+            ""
+          ) : (
+            <span className="number-description">
+              {convertType.subcategory.alphabet[0]}→
+              {
+                convertType.subcategory.alphabet[
+                  formatShift(convertType.subcategory.shift)
+                ]
+              }
+            </span>
+          )}
           <button
             onClick={() =>
               setConvertType({
@@ -129,7 +163,9 @@ const CaesarCipherOptions = ({ convertType, setConvertType }) => {
       </div>
 
       <div className="option-long">
-        <label htmlFor="alphabet">Alphabet</label>
+        <label htmlFor="alphabet" className={error.active ? "error" : ""}>
+          {error.active ? error.msg : "Alphabet"}
+        </label>
         <input
           type="text"
           name="alphabet"
