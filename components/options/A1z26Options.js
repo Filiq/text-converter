@@ -26,7 +26,10 @@ const A1z26Options = ({ convertType, setConvertType }) => {
         msg: "Alphabet must be at least 2 chars long",
       });
     } else if (convertType.subcategory.ignoreCase) {
-      const sorted = convertType.subcategory.alphabet.toLowerCase().split("");
+      const sorted = convertType.subcategory.alphabet
+        .toLowerCase()
+        .split("")
+        .sort();
 
       for (let i = 0; i < sorted.length; i++) {
         if (sorted[i] === sorted[i + 1]) {
@@ -36,8 +39,19 @@ const A1z26Options = ({ convertType, setConvertType }) => {
           });
         }
       }
+    } else {
+      const sorted = convertType.subcategory.alphabet.split("").sort();
 
-      setAlphabetError({ active: false, msg: "" });
+      for (let i = 0; i < sorted.length; i++) {
+        if (sorted[i] === sorted[i + 1]) {
+          setAlphabetError({
+            active: true,
+            msg: "Alphabet cannot contains duplicate charsX",
+          });
+          break;
+        }
+        setAlphabetError({ active: false, msg: "" });
+      }
     }
   }, [convertType]);
 
