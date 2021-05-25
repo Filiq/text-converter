@@ -59,5 +59,9 @@ const SCMain = styled.main`
     h2 {
       color: ${(props) => props.theme.textareaBackground};
     }
+
+    @media (max-width: 1440px) {
+      text-align: center;
+    }
   }
 `;
