@@ -19,17 +19,31 @@ const CaesarCipherOptions = ({ convertType, setConvertType }) => {
     if (convertType.subcategory.alphabet.length < 2)
       return setError({
         active: true,
-        msg: "Value must be at least 2 chars long",
+        msg: "Alphabet must be at least 2 chars long",
       });
 
     if (convertType.subcategory.ignoreCase) {
-      const sorted = convertType.subcategory.alphabet.toLowerCase().split("");
+      const sorted = convertType.subcategory.alphabet
+        .toLowerCase()
+        .split("")
+        .sort();
 
       for (let i = 0; i < sorted.length; i++) {
         if (sorted[i] === sorted[i + 1]) {
           return setError({
             active: true,
-            msg: "Value cannot contains duplicate chars",
+            msg: "Alphabet cannot contains duplicate chars",
+          });
+        }
+      }
+    } else {
+      const sorted = convertType.subcategory.alphabet.split("").sort();
+
+      for (let i = 0; i < sorted.length; i++) {
+        if (sorted[i] === sorted[i + 1]) {
+          return setError({
+            active: true,
+            msg: "Alphabet cannot contains duplicate chars",
           });
         }
       }
