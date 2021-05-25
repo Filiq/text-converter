@@ -11,7 +11,7 @@ const Settings = ({
 }) => {
   const settingsVariants = {
     hidden: {
-      y: -420,
+      y: "-100%",
       x: "-50%",
       transition: {
         ease: "easeOut",
@@ -201,6 +201,10 @@ const SCSettings = styled(motion.div)`
   top: 0;
   z-index: 2;
   background: ${(props) => props.theme.menuBackground};
+
+  @media (max-width: 1024px) {
+    min-width: 100vw;
+  }
 
   header {
     display: flex;

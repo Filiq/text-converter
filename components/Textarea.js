@@ -314,6 +314,7 @@ const SCTextarea = styled.div`
   }
 
   textarea {
+    width: 30vw;
     min-width: 28rem;
     resize: none;
     min-height: 10rem;
@@ -362,6 +363,10 @@ const SCTextarea = styled.div`
       .option-short-text-container {
         max-width: 21rem;
         display: flex;
+
+        @media (max-width: 440px) {
+          max-width: 17.25rem;
+        }
 
         div {
           display: flex;
@@ -468,6 +473,44 @@ const SCTextarea = styled.div`
       width: 100%;
       min-height: 2.5rem;
       background: ${(props) => props.theme.textareaBackground};
+    }
+  }
+
+  @media (max-width: 1440px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .settings {
+      margin: 2.5rem 0;
+    }
+
+    .to {
+      margin-bottom: 5rem;
+    }
+
+    textarea {
+      min-width: calc(35vw + 11.5rem);
+    }
+  }
+
+  @media (max-width: 440px) {
+    .from {
+      .headline {
+        padding: 0 0.25rem 0 0.75rem;
+        .from-headline {
+          div {
+            button {
+              padding: 0.4rem 0.5rem;
+              margin-left: 0.25rem;
+            }
+          }
+        }
+      }
+    }
+
+    .settings {
+      min-width: 18.5rem;
     }
   }
 `;
