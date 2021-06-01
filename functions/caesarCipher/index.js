@@ -1,5 +1,5 @@
-import caesarCipherEncode from "./caesarCipherEncode";
-import caesarCipherDecode from "./caesarCipherDecode";
+import encode from "./encode";
+import decode from "./decode";
 
 const caesarCipher = (str, subcategory) => {
   if (str === "") return "";
@@ -8,14 +8,14 @@ const caesarCipher = (str, subcategory) => {
 
   switch (type) {
     case "encode":
-      return caesarCipherEncode(
+      return encode(
         str,
         shift === "-" || shift === "" ? 0 : shift,
         alphabet,
         ignoreCase
       );
     case "decode":
-      return caesarCipherDecode(
+      return decode(
         str,
         shift === "-" || shift === "" ? 0 : shift,
         alphabet,
